@@ -26,14 +26,8 @@ while True:
 
                 lmList.append([id, cx, cy])
 
-        #     for id, lm in enumerate(handLms.landmark):
-        #         h, w, c = img.shape
-        #         cx, cy = int(lm.x * w), int(lm.y * h)
                 cv2.circle(img, (cx, cy), 7, (0, 0, 0), cv2.FILLED)
             mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
-
-    
-    # print(results.multi_hand_landmarks)
 
     if len(lmList) != 0:
         print(lmList[1])

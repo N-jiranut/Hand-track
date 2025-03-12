@@ -8,6 +8,8 @@ pose = mpPose.Pose()
 
 cap = cv2.VideoCapture(0)
 
+i=0
+
 while True:
     succuss, img = cap.read()
 
@@ -17,13 +19,22 @@ while True:
     myList = []
 
     if results.pose_landmarks:
-        mpDraw.draw_landmarks(img, results.pose_landmarks, mpPose.POSE_CONNECTIONS)
-        
+
         for id, lm in enumerate(results.pose_landmarks.landmark):
             h, w, c = img.shape
             cx, cy = int(lm.x*w), int(lm.y*h)
+
+            myList.append([id, cx, cy])
+
             cv2.circle(img, (cx, cy), 7, (0, 0, 0), cv2.FILLED)
 
+        mpDraw.draw_landmarks(img, results.pose_landmarks, mpPose.POSE_CONNECTIONS)
+
+    if len(myList) != 0:
+        print(myList[1])
+
+    print(i)
+    i +=1
     cv2.imshow("image", img)
 
     time.sleep(.25)
