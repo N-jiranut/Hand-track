@@ -1,7 +1,8 @@
 import cv2
 import mediapipe as mp
 import time
-
+# import HandTrackingModule as htm
+# from cvzone.HandTrackingModule import HandDetector
 
 class handDetector():
     def __init__(self, mode=False, maxHands=2, model_complexity=1, detectioncon=0.5, trackcon=0.5):
@@ -18,20 +19,30 @@ class handDetector():
     def findHands(self, img, draw=True):
 
         imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        results = self.hands.process(imgRGB)
+        self.results = self.hands.process(imgRGB)
 
-        if results.multi_hand_landmarks:
-            for handlms in results.multi_hand_landmarks:
+        if self.results.multi_hand_landmarks:
+            for handLms in self.results.multi_hand_landmarks:
                 if draw:
-                    self.mpDraw.draw_landmarks(img, handlms, self.mpHands.HAND_CONNECTIONS)
+                    self.mpDraw.draw_landmarks(img, handLms, self.mpHands.HAND_CONNECTIONS)
         return img
-        # for id, lm in enumerate(handlms.landmark):
-        #     h, w, c = img.shape
-        #     cx, cy = int(lm.x * w), int(lm.y * h)
-        #     print(id, cx, cy)
-        #      if id == 12:
-        #          cv2.putText(img, "FUCK", (cx, cy), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 255), 3)
 
+    def findPosition(self, img, handNo = 0, draw = True):
+        lmList = []
+
+        if self.results.multi_hand_landmarks:
+            myHand = self.results.multi_hand_landmarks[handNo]
+
+            for id, lm in enumerate(myHand.landmark):
+                h, w, c = img.shape
+                cx, cy = int(lm.x * w), int(lm.y * h)
+                # print(id, cx, cy)
+
+                lmList.append([id, cx, cy])
+                if draw:
+                    cv2.circle(img, (cx, cy), 15, (0, 0, 0), cv2FILLED)
+        
+        return lmList
 
 def main():
     pTime = 0
@@ -40,7 +51,12 @@ def main():
     detector = handDetector()
     while True:
         success, img = cap.read()
-        img = detector.findHands(img)
+        img = detector.findHands(img, draw = True)
+        lmList = detector.findPosition(img, draw = False)
+
+        if len(lmList) != 0:
+            cv2.circle(img, (lmList[1][1], lmList[1][2]), 15, (255, 0, 0), cv2.FILLED)
+            print(lmList[1])
 
         cTime = time.time()
         fps = 1 / (cTime - pTime)
@@ -50,7 +66,8 @@ def main():
 
         cv2.imshow("Image", img)
 
-        cv2.waitKey(1)
+        if cv2.waitKey(1) == ord("q"):
+            break
 
 
 if __name__ == "__main__":
