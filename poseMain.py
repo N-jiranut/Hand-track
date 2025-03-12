@@ -6,7 +6,7 @@ mpDraw = mp.solutions.drawing_utils
 mpPose = mp.solutions.pose
 pose = mpPose.Pose()
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture("PoseVideos/test1.mp4")
 
 i=0
 
@@ -31,13 +31,13 @@ while True:
         mpDraw.draw_landmarks(img, results.pose_landmarks, mpPose.POSE_CONNECTIONS)
 
     if len(myList) != 0:
-        print(myList[1])
+        print(myList)
 
     print(i)
     i +=1
     cv2.imshow("image", img)
 
-    time.sleep(.25)
+    # time.sleep(.1)
 
     if cv2.waitKey(1) == ord("q"):
         break
