@@ -6,7 +6,7 @@ mpDraw = mp.solutions.drawing_utils
 mpPose = mp.solutions.pose
 pose = mpPose.Pose()
 
-cap = cv2.VideoCapture("PoseVideos/Hello0.jpg")
+cap = cv2.VideoCapture("PoseVideos/Hello1.jpg")
 
 succuss, img = cap.read()
 
@@ -28,9 +28,18 @@ if results.pose_landmarks:
     mpDraw.draw_landmarks(img, results.pose_landmarks, mpPose.POSE_CONNECTIONS)
 
 if len(myList) != 0:
-    print(myList)
+    cv2.circle(img, (myList[15][1], myList[15][2]), 15, (255, 0, 0), cv2.FILLED)
+    cv2.circle(img, (myList[16][1], myList[16][2]), 15, (255, 0, 0), cv2.FILLED)
+    print(myList[15])
+    print(myList[16])
+
+Nimg = cv2.resize(img, (1000,1000))
+
+if myList[16][1] - myList[15][1] <= 600 and myList[16][2] - myList[15][2] <= 200:
+    print("สวัสดีชาวโลก")
+
 while True:
-    cv2.imshow("image", img)
+    cv2.imshow("image", Nimg)
 
     if cv2.waitKey(1) == ord("q"):
         break

@@ -30,11 +30,14 @@ while True:
 
         mpDraw.draw_landmarks(img, results.pose_landmarks, mpPose.POSE_CONNECTIONS)
 
-    if len(myList) != 0:
-        print(myList)
-
-    print(i)
-    i +=1
+    # if len(myList) != 0:
+    #     print(myList)
+    
+    if myList[16][1] - myList[15][1] <= 600 and myList[16][2] - myList[15][2] <= 200:
+        print("สวัสดีชาวโลก")
+        
+    # print(i)
+    # i +=1
     cv2.imshow("image", img)
 
     # time.sleep(.1)
