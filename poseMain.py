@@ -39,7 +39,7 @@ while True:
         # cv2.circle(img, (myList[12][1], myList[12][2]), 15, (255, 0, 0), cv2.FILLED)
         # cv2.circle(img, (myList[16][1], myList[16][2]), 15, (255, 0, 0), cv2.FILLED)
 
-        if abs(myList[16][1] - myList[15][1]) <= 80 and abs(myList[16][2] - myList[15][2]) <= 40 and abs(myList[12][1] - myList[16][1]) <= 70 and abs(myList[12][2] - myList[16][2]) <= 40:
+        if abs(myList[16][1] - myList[15][1]) <= 80 and abs(myList[16][2] - myList[15][2]) <= 40 and abs(myList[12][1] - myList[16][1]) <= 90 and abs(myList[12][2] - myList[16][2]) <= 40:
             print("สวัสดีชาวโลก")
             text="Hello!"
         elif abs(myList[19][1] - myList[20][1]) <= 120 and abs(myList[19][2] - myList[20][2]) <= 110 and abs(myList[19][1] - myList[12][1]) >= 80 and abs(myList[19][2] - myList[12][2]) >= 140:

@@ -33,7 +33,7 @@ if len(myList) != 0:
     print(myList[15])
     print(myList[16])
 
-Nimg = cv2.resize(img, (1000,1000))
+Nimg = cv2.resize(img, (850,700))
 
 if myList[16][1] - myList[15][1] <= 600 and myList[16][2] - myList[15][2] <= 200:
     print("สวัสดีชาวโลก")
