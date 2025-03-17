@@ -26,11 +26,11 @@ while True:
 
                 lmList.append([id, cx, cy])
 
-                cv2.circle(img, (cx, cy), 7, (0, 0, 0), cv2.FILLED)
+                # cv2.circle(img, (cx, cy), 7, (0, 0, 0), cv2.FILLED)
             mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
 
     if len(lmList) != 0:
-        print(lmList[1])
+        print(lmList[0])
 
     print(i)
     i +=1
