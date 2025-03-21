@@ -7,38 +7,41 @@ cap = cv2.VideoCapture(0)
 mpHands = mp.solutions.hands
 hands = mpHands.Hands()
 mpDraw = mp.solutions.drawing_utils
-
-pTime = 0
-cTime = 0
-wTime = time.time()
+i=1
 
 while True:
+    LeftH=[]
+    RightH=[]
     success, img = cap.read()
+    img = cv2.flip(img, 1)
     imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     results = hands.process(imgRGB)
     # print(results.multi_hand_landmarks)
     
     
     if results.multi_hand_landmarks:
-        for handLms in results.multi_hand_landmarks:
-            for id, lm in enumerate(handLms.landmark):
-                h, w, c = img.shape
-                cx, cy = int(lm.x * w), int(lm.y * h)
-                cv2.circle(img, (cx, cy), 10, (0, 0, 0), cv2.FILLED)
+        for idx, hand_landmarks in enumerate(results.multi_hand_landmarks):
+            handedness = results.multi_handedness[idx].classification[0].label
+            for handLms in results.multi_hand_landmarks:
+                for id, lm in enumerate(handLms.landmark):
+                    h, w, c = img.shape
+                    cx, cy = int(lm.x * w), int(lm.y * h)
+                    cv2.circle(img, (cx, cy), 7, (240, 255, 85), cv2.FILLED)
+                    if handedness == "Left":
+                        LeftH.append(['left',id,cx,cy])
+                    elif handedness == "Right":
+                        RightH.append(['right',id,cx,cy])
 
-            mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
-    
-    cTime = time.time()
-    fps = 1/(cTime-pTime)
-    pTime = cTime
-    
-    if int(cTime) - int(wTime) == 3:
-        print(results.multi_hand_landmarks)
-        wTime = cTime
-    # print(cTime-wTime)
+                mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
 
-    cv2.putText(img, str(int(fps)), (10, 70), cv2.FONT_HERSHEY_PLAIN, 3, (0,0,0), 3)
+    if len(LeftH)!=0:
+        print(LeftH)
+    if len(RightH)!=0:
+        print(RightH)
 
+    print(i)
+    i+=1
     cv2.imshow("image", img)
+    time.sleep(.5)
     if cv2.waitKey(1) == ord("q"):
         break
