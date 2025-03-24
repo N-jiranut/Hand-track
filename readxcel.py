@@ -1,38 +1,46 @@
 # import pandas as pd
-# print(a)
+# # main={}
+# # main = pd.DataFrame(main)
+# # main.to_excel('data/test1.xlsx')
+# # print('reset successfully.')
 
-# importing the module
-import pandas as pd
-# a = pd.read_excel('data/Book2.xlsx')  
-# # creating the DataFrame
-# marks_data = pd.DataFrame({'ID': ["c","d"],
-#                            'Name': ["c","d"]})
-# main = pd.concat([a, marks_data], ignore_index=True)
-main = {}
-main = pd.DataFrame(main)
-# data={}
+
+# from openpyxl import load_workbook
+
+# # Existing Excel file
+# existing_file = 'data/test1.xlsx'
+
+# # New data to append
+# new_data = [['aaa', 28, 55000],["bbb", 22, 20000,000]]
+
+# # Load existing workbook
+# wb = load_workbook(existing_file)
+
+# # Select the active sheet
+# ws = wb.active
+
+# # Append new data
+# for row in new_data:
+#     print(row)
+#     ws.append(row)
+
+# Save the workbook
+# wb.save(existing_file)
+
+# test = []
+# add = ["asdasd","555ตลก"]
+# new = ["abc","efg"]
+# for i in range(len(add)):
+#     test.append(add[i])
+#     test.append("abc")
 # for i in range(21):
-#        data.update({"LH"+str(i):[None]})
-# for i in range(21):
-#        data.update({"RH"+str(i):[None]})
-# for i in range(33):
-#        data.update({"B"+str(i):[None]})
-        
-# new = pd.DataFrame({'ID': ["a","b"],'Name': ["a","b"]})
+#     print(i)
+# add.extend(new)
+# print(add)
 
-# a = 200
-# b = 20
-# print(new)
-# determining the name of the file
-# file_name = 'data/Book3.xlsx'
 
-# saving the excel
-# xd=pd.DataFrame(data)
-# df = pd.concat([marks_data, new], ignore_index=True)
-# print(main)
-# data["LH"+str(1)] = (str(a)+"-"+str(b))
-# data=pd.DataFrame(data)
-# data.to_excel('data/test.xlsx')
-# print(data["LH"+str(1)])
-main.to_excel('data/test.xlsx')
-print('reset successfully.')
+
+words = ["Hey", "there","kuy"]
+for i, word in enumerate(words):
+    # print(f"'Word #{i}: <{word}> has {len(word)} letters.'")
+    print(word)
