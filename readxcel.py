@@ -1,27 +1,29 @@
-# import pandas as pd
-# # main={}
-# # main = pd.DataFrame(main)
-# # main.to_excel('data/test1.xlsx')
-# # print('reset successfully.')
+import pandas as pd
+from openpyxl import load_workbook
+# main={}
+# main = pd.DataFrame(main)
+# main.to_excel('data/That.xlsx')
+# print('reset successfully.')
+wb=[]
+wb.save('data/Normal')
 
 
-# from openpyxl import load_workbook
+# # # Existing Excel file
+# existing_file = 'data/Normal.xlsx'
 
-# # Existing Excel file
-# existing_file = 'data/test1.xlsx'
-
-# # New data to append
+# # # New data to append
 # new_data = [['aaa', 28, 55000],["bbb", 22, 20000,000]]
 
-# # Load existing workbook
+# # # Load existing workbook
 # wb = load_workbook(existing_file)
+# print(wb)
 
-# # Select the active sheet
+# # # Select the active sheet
 # ws = wb.active
 
-# # Append new data
+# # # Append new data
 # for row in new_data:
-#     print(row)
+# #     print(row)
 #     ws.append(row)
 
 # Save the workbook
@@ -40,7 +42,7 @@
 
 
 
-words = ["Hey", "there","kuy"]
-for i, word in enumerate(words):
-    # print(f"'Word #{i}: <{word}> has {len(word)} letters.'")
-    print(word)
+# words = ["Hey", "there","kuy"]
+# for i, word in enumerate(words):
+#     # print(f"'Word #{i}: <{word}> has {len(word)} letters.'")
+#     print(word)
