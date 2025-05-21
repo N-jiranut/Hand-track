@@ -26,17 +26,17 @@ with mp_hands.Hands(min_detection_confidence=0.5, min_tracking_confidence=0.5, m
         
         if results.multi_hand_landmarks:
             for idx, hand_landmarks in enumerate(results.multi_hand_landmarks):
-                print(lol,"<---")
-                lol+=1
+                # print(lol,"<---")
+                # lol+=1
                 handedness = results.multi_handedness[idx].classification[0].label
                 # print(f"Detected {handedness} Hand")
                 mp_draw.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
                 h, w, _ = frame.shape
                 x, y = int(hand_landmarks.landmark[0].x * w), int(hand_landmarks.landmark[0].y * h)
-                lmList.append([idx, x, y])
+                # lmList.append([idx, x, y])
                 cv2.putText(frame, f"{handedness} Hand", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-            if len(lmList) != 0:
-                print(lmList)
+            # if len(lmList) != 0:
+            #     print(lmList)
 
         # Show the Frame
         cv2.imshow("Hand Tracking", frame)

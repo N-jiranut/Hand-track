@@ -8,15 +8,16 @@ mpDraw = mp.solutions.drawing_utils
 mpPose = mp.solutions.pose
 pose = mpPose.Pose()
 mpHands = mp.solutions.hands
-hands = mpHands.Hands()
+hands = mpHands.Hands(2)
 mpDraw = mp.solutions.drawing_utils
 
-main='data/Normal.xlsx'
+main='data/Runout4000.xlsx'
+# output = 
 
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 
-load = load_workbook(main)
-loaded = load.active
+# load = load_workbook(main)
+# loaded = load.active
 count = 6
 
 for i in range(count-1):
@@ -24,8 +25,8 @@ for i in range(count-1):
     count-=1
     time.sleep(1)
 print("<Start capture>")
-    
-for i in range(150):
+reminder=[]   
+for i in range(4000):
     print(i+1)
     succus, img = cap.read()
     img = cv2.flip(img, 1)
@@ -36,6 +37,7 @@ for i in range(150):
     data=[]
     LeftHand=[]
     RightHand = []
+    Pose = []
     if results1.multi_hand_landmarks:
         for idx, hand_landmarks in enumerate(results1.multi_hand_landmarks):
             handedness = results1.multi_handedness[idx].classification[0].label
@@ -44,13 +46,12 @@ for i in range(150):
                         h, w, c = img.shape
                         cx, cy = int(lm.x * w), int(lm.y * h)
                         if handedness:                        
-                            if handedness == "Left":
+                            if handedness == "Left" and len(LeftHand) < 42:
                                 LeftHand.append(cx)
                                 LeftHand.append(cy)
-                            elif handedness == "Right":
+                            elif handedness == "Right" and len(RightHand) < 42:
                                 RightHand.append(cx)
                                 RightHand.append(cy)
-                                
     if len(LeftHand) == 0:
         for i in range(42):
             LeftHand.append(0)
@@ -65,14 +66,18 @@ for i in range(150):
             h, w, c = img.shape
             cx, cy = int(lm.x*w), int(lm.y*h)
 
-            data.append(cx)
-            data.append(cy)
-
-    loaded.append(data)
-    load.save(main)
-    time.sleep(.1)
+            Pose.append(cx)
+            Pose.append(cy)
+            
+    if len(Pose) == 0:
+        for i in range(66):
+            Pose.append(0)
+    data.extend(Pose)    
+    reminder.extend([data])
+    # time.sleep(.001)
     cv2.waitKey(1)
-
+# loaded.append(reminder)
+# load.save(main)
+reminder = pd.DataFrame(reminder)
+reminder.to_excel(main)
 print("Cupture complete")
-
-# ABX
