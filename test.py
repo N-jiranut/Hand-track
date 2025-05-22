@@ -1,9 +1,9 @@
 import cv2, glob, time, mediapipe, pandas
 
-main = "data/Normal_x.csv"
+main = "data/Backto_x.csv"
 pose_number = 0
 
-data_class = "Normal"
+data_class = "Backto"
 
 total_data = []
 images_path = glob.glob(f"TestPose/{data_class}/*.jpg")
@@ -64,4 +64,4 @@ for path in images_path:
 df_data = pandas.DataFrame(total_data)
 # df_data = df_data.drop(df_data.index[[0]])
 df_data.to_csv(main, index=False)
-print("Finish!")
+print(f"Finish!")
