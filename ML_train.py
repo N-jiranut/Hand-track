@@ -1,4 +1,5 @@
 import numpy
+import sklearn
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dropout, Dense
 

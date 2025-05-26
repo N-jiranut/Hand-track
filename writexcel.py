@@ -9,9 +9,8 @@ mpPose = mp.solutions.pose
 pose = mpPose.Pose()
 mpHands = mp.solutions.hands
 hands = mpHands.Hands(2)
-mpDraw = mp.solutions.drawing_utils
 
-main='data/Runout4000.xlsx'
+main='data/Normal-x.xlsx'
 # output = 
 
 cap = cv2.VideoCapture(0)

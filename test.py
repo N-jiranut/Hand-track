@@ -1,9 +1,9 @@
 import cv2, glob, time, mediapipe, pandas
 
-main = "data/Backto_x.csv"
+main = "data/Go_x.csv"
 pose_number = 0
 
-data_class = "Backto"
+data_class = "Go"
 
 total_data = []
 images_path = glob.glob(f"TestPose/{data_class}/*.jpg")
